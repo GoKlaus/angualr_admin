@@ -1,15 +1,15 @@
 
 'use strict';
 
-var gulp = require('gulp');
+const { series, task, src } = require('gulp');
 
 var $ = require('gulp-load-plugins')();
 
-gulp.task('wintersmith-generate', $.shell.task([
+task('wintersmith-generate', $.shell.task([
     'wintersmith build'
 ], { cwd: 'docs' }));
 
-gulp.task('deploy-docs', ['wintersmith-generate'], function() {
-    return gulp.src('./docs/build/**/*')
+task('deploy-docs', series(task('wintersmith-generate'), function() {
+    return src('./docs/build/**/*')
         .pipe($.ghPages());
-});
+}));

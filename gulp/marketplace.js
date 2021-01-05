@@ -1,13 +1,16 @@
 'use strict';
 
+const { series, task, src, dest } = require('gulp');
 var path = require('path');
-var gulp = require('gulp');
 var zip = require('gulp-zip');
 var prompt = require('gulp-prompt');
 var rename = require('gulp-rename');
+require('./build');
+require('./devRelease');
 
-gulp.task('marketplace-release', ['build', 'dev-release'], function() {
-    return gulp.src('')
+
+task('marketplace-release', series(task('build'), task('dev-release'), function() {
+    return src('')
         .pipe(prompt.prompt({
             type: 'input',
             name: 'version',
@@ -23,4 +26,4 @@ gulp.task('marketplace-release', ['build', 'dev-release'], function() {
                 .pipe(gulp.dest('.'));
         }));
 
-});
+}));

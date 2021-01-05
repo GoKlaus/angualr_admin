@@ -1,7 +1,9 @@
 'use strict';
 
-var gulp = require('gulp');
+const { series, task } = require('gulp');
+var log = require('fancy-log');
 var wrench = require('wrench');
+// require('./gulp/test.js');
 
 /**
  *  This will load all js or coffee files in the gulp directory
@@ -9,8 +11,8 @@ var wrench = require('wrench');
  */
 wrench.readdirSyncRecursive('./gulp').filter(function(file) {
     return (/\.(js|coffee)$/i).test(file);
-}).map(function (file) {
-    console.log(file);
+}).map(file => {
+    log.info(file);
     require('./gulp/' + file);
 });
 
@@ -19,6 +21,13 @@ wrench.readdirSyncRecursive('./gulp').filter(function(file) {
  *  Default task clean temporaries directories and launch the
  *  main optimization build task
  */
-gulp.task('default', ['clean'], function() {
-    gulp.start('build');
-});
+task('default', series(task('clean'), function() {
+    task('build')();
+}));
+// task('default', cb => {
+//     log.info('defualt task');
+//     cb();
+// });
+
+
+// task('test', task('test'));
