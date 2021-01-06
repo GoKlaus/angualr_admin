@@ -36,6 +36,7 @@ task('inject-task', series(task('scripts'), task('styles'), task('injectAuth'), 
         path.join('!' + conf.paths.tmp, '/serve/app/vendor.css')
     ], { read: false });
 
+    // ！ 用来排除一些文件
     var injectScripts = src([
         path.join(conf.paths.src, '/assets/js/**/*.js'),
         path.join(conf.paths.src, '/app/**/*.module.js'),

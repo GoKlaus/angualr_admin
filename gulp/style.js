@@ -2,6 +2,7 @@
 
 var path = require('path');
 var conf = require('./conf');
+var log = require('fancy-log');
 
 var browserSync = require('browser-sync');
 
@@ -22,9 +23,12 @@ task('styles-reload', series(task('styles'), function() {
 
 
 task('stylesAuth', function() {
+    log.info('stylesAuth');
     return buildSingleScss(path.join(conf.paths.src, '/sass/auth.scss'));
 });
+
 task('styles404', function() {
+    log.info('styles404');
     return buildSingleScss(path.join(conf.paths.src, '/sass/404.scss'));
 });
 
@@ -62,6 +66,10 @@ var buildStyles = function() {
         .pipe(dest(path.join(conf.paths.tmp, '/serve/app/')));
 };
 
+/**
+ * 创建单一scss文件
+ * @param {*} paths 
+ */
 var buildSingleScss = function(paths) {
     var sassOptions = {
         style: 'expanded'

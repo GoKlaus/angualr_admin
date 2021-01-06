@@ -5,6 +5,9 @@ var path = require('path');
 var conf = require('./conf');
 const { task, src, dest } = require('gulp');
 
+/**
+ * 拷贝框架的图片
+ */
 task('copyVendorImages', function() {
     return src([
         path.join(conf.wiredep.directory, '**/ammap/dist/ammap/images/**/*'),

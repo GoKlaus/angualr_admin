@@ -10,7 +10,9 @@ var $ = require('gulp-load-plugins')({
     pattern: ['gulp-*', 'main-bower-files', 'uglify-save-license', 'del']
 });
 
-
+/**
+ * 编译html文件到 .tmp/partials 文件下 partials--模板的意思
+ */
 task('partials', function() {
     return src([
         path.join(conf.paths.src, '/app/**/*.html'),

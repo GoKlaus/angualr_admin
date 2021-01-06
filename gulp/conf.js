@@ -34,7 +34,7 @@ exports.wiredep = {
  */
 exports.errorHandler = function(title) {
     'use strict';
-
+    // 错误处理器
     return function(err) {
         log.error(err);
         this.emit('end');
